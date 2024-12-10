@@ -57,7 +57,7 @@ This approach ensures that the necessary files and folders from the template are
     - **LoadingIndicator**: Indicate loading states
     - **Toast**: Notification system
     - **Navbar**: Navigation bar
-    - **NavbarTab**: Interactive tabs for the navbar
+        - **Tab**: Navbar tab
 
 ### Server-Side
 - **Framework**: Express
@@ -90,3 +90,57 @@ This approach ensures that the necessary files and folders from the template are
 - [JWT](https://www.npmjs.com/package/jsonwebtoken)
 - [SQLite3](https://github.com/mapbox/node-sqlite3)
 - [UUID](https://github.com/uuidjs/uuid)
+
+## Where should I start?
+
+### Client Setup
+
+1. Make sure you are in the client folder (`cd client`)
+1. Install the dependancies `npm i`
+
+### Start Client
+
+1. Make sure you are in the client folder if not already (`cd client`)
+1. Start the client with `npm run dev`
+
+### Pages & Routes
+
+- All pages are in "src/screens"
+- The dashboard screen is a starting point
+- Editing routes can be done in "src/App.jsx".
+
+### Components
+
+- Basic components are in "src/components"
+- You can use them anywhere and easily edit their style.
+
+### Style
+
+- This template uses modules CSS
+- The CSS reset is in "src/index.css"
+- The default scrollbar style is in "src/index.css"
+- Write CSS classes like this
+    ```js
+    className={styles.myClass}
+    ```
+- Multiple classes look like this
+    ```js
+    className={`${styles.myClass1} ${styles.myClass2}`}
+    ```
+- Conditional CSS classes
+    ```js
+    className={`${isVisible ? styles.isVisible : ""}`}
+    ```
+- the CSS looks like this, unchanged from normal CSS
+    ```css
+    .myClass {
+        ...
+    }
+    ```
+
+### Fonts
+
+- Fonts are stored at "src/assets/fonts"
+- CSS files containing the fontfaces are imported at "src/main.jsx"
+- Inter is set as the default font at "src/index.css"
+- Inter is stored at "src/assets/fonts/inter" and the fontface is declared at "src/assets/fonts/inter/inter.css".

@@ -4,7 +4,8 @@
   "description": "A robust full-stack template with Vite, React, and Express, designed for rapid development. Includes seamless client-server integration, modern tools, and best practices for scalable web applications.",
   "main": "index.js",
   "scripts": {
-    "dev": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cd client && npm run dev && cd ../server && npm run dev",
+    "setup": "cd client && npm install && cd ../server && npm install"
   },
   "keywords": [
     "full-stack",
