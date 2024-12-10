@@ -1,0 +1,30 @@
+{
+  "name": "genesis",
+  "version": "1.0.0",
+  "description": "A robust full-stack template with Vite, React, and Express, designed for rapid development. Includes seamless client-server integration, modern tools, and best practices for scalable web applications.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "full-stack",
+    "vite",
+    "react",
+    "express",
+    "template",
+    "javascript",
+    "typescript",
+    "client-server",
+    "web development",
+    "modern stack",
+    "scalable apps",
+    "boilerplate",
+    "nodejs",
+    "frontend",
+    "backend",
+    "web application",
+    "developer tools"
+  ],
+  "author": "torstendngh@gmail.com",
+  "license": "ISC"
+}
