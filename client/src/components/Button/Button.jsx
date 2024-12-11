@@ -1,6 +1,6 @@
 import styles from "./Button.module.css";
 
-const Button = ({ children, variant = "", disabled = false, ...props }) => {
+const Button = ({ children, variant = "", disabled = false, className, ...props }) => {
   return (
     <button
       role="button"
