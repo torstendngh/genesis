@@ -1,10 +1,10 @@
 import styles from "./Link.module.css";
 
-const Link = ({}) => {
+const Link = ({children, href, ...props}) => {
   return (
-    <div className={styles.main}>
-
-    </div>
+    <a className={styles.link} href={href} {...props}>
+      {children}
+    </a>
   );
 };
 
