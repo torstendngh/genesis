@@ -1,10 +1,15 @@
 import styles from "./Button.module.css";
 
-const Button = ({}) => {
+const Button = ({ children, variant = "", disabled = false, ...props }) => {
   return (
-    <div className={styles.main}>
-
-    </div>
+    <button
+      role="button"
+      className={`${styles.button} ${styles[variant]} ${className}`}
+      disabled={disabled}
+      {...props}
+    >
+      {children}
+    </button>
   );
 };
 
