@@ -10,6 +10,20 @@ Prerequisites: Node.js, NPM, degit (`npm install -g degit`)
 
 Run this command in the folder you want to install template to
 ```bash
+degit torstendngh/genesis .
+```
+
+> [!NOTE]  
+> You may notice ".gitkeep" files in empty folders. They exist to force git from cloning the empty folders, to keep the folder structure intact. You can install this template withouth the ".gitkeep" files below
+
+## 🚀 Install and remove .gitkeep files
+
+The default install method (above) keeps the ".gitkeep" files so the folder structure stays in tact. If you want to remove these files on clone, run this command instead.
+
+Prerequisites: Node.js, NPM, degit (`npm install -g degit`)
+
+Run this command in the folder you want to install template to
+```bash
 degit torstendngh/genesis . && find . -name ".gitkeep" -delete
 ```
 
@@ -108,6 +122,7 @@ This approach ensures that the necessary files and folders from the template are
 - All pages are in "src/screens"
 - The dashboard screen is a starting point
 - Editing routes can be done in "src/App.jsx".
+- [This](https://blog.webdevsimplified.com/2022-07/react-router/) is a good learning resource for React Router
 
 ### Components
 
@@ -144,3 +159,7 @@ This approach ensures that the necessary files and folders from the template are
 - CSS files containing the fontfaces are imported at "src/main.jsx"
 - Inter is set as the default font at "src/index.css"
 - Inter is stored at "src/assets/fonts/inter" and the fontface is declared at "src/assets/fonts/inter/inter.css".
+
+### Docs
+
+Feel free to replace this readme with your own. You may also remove "docs/template".
