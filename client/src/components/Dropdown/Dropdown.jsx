@@ -2,10 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import styles from "./Dropdown.module.css";
 
+const sampleOptions = [
+  { label: "Germany", value: "de" },
+  { label: "United States", value: "us" },
+];
+
 const Dropdown = ({
   options = [],
   placeholder = "Select an option",
-  placement = "bottom", // New prop to control placement
+  placement = "bottom",
 }) => {
   const [isOpen, setIsOpen] = useState(false); // Dropdown open/close state
   const [searchQuery, setSearchQuery] = useState(""); // Search input
@@ -235,58 +240,62 @@ const Dropdown = ({
   }, [isOpen, placement]);
 
   // Render dropdown menu in a portal
-  const dropdownMenu = isOpen ? (
-    ReactDOM.createPortal(
-      <div
-        className={styles.dropdownMenu}
-        style={dropdownStyles}
-        ref={dropdownRef}
-        role="listbox"
-        aria-activedescendant={
-          filteredOptions[highlightedIndex]
-            ? `option-${highlightedIndex}`
-            : undefined
-        }
-      >
-        <input
-          type="text"
-          className={styles.searchInput}
-          placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-            setHighlightedIndex(0);
-          }}
-          ref={searchInputRef}
-          autoFocus
-          aria-label="Search options"
-          onKeyDown={handleKeyDown}
-        />
-        <ul className={styles.optionsList} tabIndex={-1}>
-          {filteredOptions.length > 0 ? (
-            filteredOptions.map((option, index) => (
-              <li
-                key={option.value}
-                id={`option-${index}`}
-                role="option"
-                aria-selected={selectedOption?.value === option.value}
-                className={`${styles.option} ${
-                  highlightedIndex === index ? styles.highlighted : ""
-                } ${selectedOption?.value === option.value ? styles.selected : ""}`}
-                onClick={() => selectOption(option)}
-                onMouseEnter={() => setHighlightedIndex(index)}
-              >
-                {option.label}
-              </li>
-            ))
-          ) : (
-            <li className={styles.noOptions}>No options found</li>
-          )}
-        </ul>
-      </div>,
-      document.body // Portal target
-    )
-  ) : null;
+  const dropdownMenu = isOpen
+    ? ReactDOM.createPortal(
+        <div
+          className={styles.dropdownMenu}
+          style={dropdownStyles}
+          ref={dropdownRef}
+          role="listbox"
+          aria-activedescendant={
+            filteredOptions[highlightedIndex]
+              ? `option-${highlightedIndex}`
+              : undefined
+          }
+        >
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setHighlightedIndex(0);
+            }}
+            ref={searchInputRef}
+            autoFocus
+            aria-label="Search options"
+            onKeyDown={handleKeyDown}
+          />
+          <ul className={styles.optionsList} tabIndex={-1}>
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option, index) => (
+                <li
+                  key={option.value}
+                  id={`option-${index}`}
+                  role="option"
+                  aria-selected={selectedOption?.value === option.value}
+                  className={`${styles.option} ${
+                    highlightedIndex === index ? styles.highlighted : ""
+                  } ${
+                    selectedOption?.value === option.value
+                      ? styles.selected
+                      : ""
+                  }`}
+                  onClick={() => selectOption(option)}
+                  onMouseEnter={() => setHighlightedIndex(index)}
+                >
+                  {option.label}
+                </li>
+              ))
+            ) : (
+              <li className={styles.noOptions}>No options found</li>
+            )}
+          </ul>
+        </div>,
+        document.body // Portal target
+      )
+    : null;
 
   return (
     <div className={styles.dropdownContainer}>
