@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../../components/Button/Button";
 import Dialog from "../../components/Dialog/Dialog";
 import Dropdown from "../../components/Dropdown/Dropdown";
@@ -9,11 +10,12 @@ import Tooltip from "../../components/Tooltip/Tooltip";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = ({}) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   return (
     <div className={styles.main}>
       {/* ↓ Delete below sample dialog */}
         <main className={styles.sampleDialog}>
-          <h1>Genesis</h1>
+          <h1>Genesis Client</h1>
           <h2>Dropdown</h2>
           <Dropdown
             options={[
@@ -35,6 +37,17 @@ const Dashboard = ({}) => {
           <Tooltip tooltip="This is a tooltip">
             <Button>Hover over me</Button>
           </Tooltip>
+          <h2>Dialog</h2>
+          <Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
+          {
+            isDialogOpen && (
+              <Dialog
+                onClose={() => setIsDialogOpen(false)}
+              >
+                <p>Dialog content goes here</p>
+              </Dialog>
+            )
+          }
         </main>
 
       {/* ↑ */}
