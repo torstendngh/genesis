@@ -7,11 +7,7 @@ const sampleOptions = [
   { label: "United States", value: "us" },
 ];
 
-const Dropdown = ({
-  options = [],
-  placeholder = "Select an option",
-  placement = "bottom",
-}) => {
+const Dropdown = ({ options = [], placeholder = "Select an option", dropdownAnchorSide = "left" }) => {
   const [isOpen, setIsOpen] = useState(false); // Dropdown open/close state
   const [searchQuery, setSearchQuery] = useState(""); // Search input
   const [highlightedIndex, setHighlightedIndex] = useState(0); // Highlighted option for keyboard navigation
@@ -19,7 +15,6 @@ const Dropdown = ({
   const dropdownRef = useRef(null); // Reference to the dropdown container
   const toggleButtonRef = useRef(null); // Reference to the toggle button
   const searchInputRef = useRef(null); // Reference to the search input
-  const [dropdownStyles, setDropdownStyles] = useState({}); // Styles for positioning
 
   // Filter options based on search query
   const filteredOptions = options.filter((option) =>
@@ -111,140 +106,24 @@ const Dropdown = ({
     }
   }, [highlightedIndex, isOpen]);
 
-  // Calculate and set dropdown position based on placement
-  useEffect(() => {
-    if (isOpen && toggleButtonRef.current) {
-      const toggleRect = toggleButtonRef.current.getBoundingClientRect();
-      const dropdownHeight = 200; // Max height as per CSS, adjust if needed
-      const dropdownWidth = toggleRect.width; // Match the toggle button's width
+  return (
+    <div className={styles.dropdownContainer}>
+      <button
+        type="button"
+        className={styles.dropdownToggle}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        onClick={toggleDropdown}
+        ref={toggleButtonRef}
+        onKeyDown={handleKeyDown}
+      >
+        {selectedOption ? selectedOption.label : placeholder}
+        <span className={styles.arrow}>{isOpen ? <>↑</> : <>↓</>}</span>
+      </button>
 
-      let top, left;
-
-      switch (placement) {
-        case "top":
-          top = toggleRect.top - dropdownHeight;
-          left = toggleRect.left;
-          break;
-        case "bottom":
-        default:
-          top = toggleRect.bottom;
-          left = toggleRect.left;
-          break;
-        case "left":
-          top = toggleRect.top;
-          left = toggleRect.left - dropdownWidth;
-          break;
-        case "right":
-          top = toggleRect.top;
-          left = toggleRect.right;
-          break;
-      }
-
-      // Ensure the dropdown stays within the viewport
-      const viewportHeight = window.innerHeight;
-      const viewportWidth = window.innerWidth;
-
-      // Adjust top position if dropdown goes beyond the viewport
-      if (top + dropdownHeight > viewportHeight) {
-        top = viewportHeight - dropdownHeight - 10; // 10px margin
-      }
-      if (top < 0) {
-        top = 10; // 10px margin
-      }
-
-      // Adjust left position if dropdown goes beyond the viewport
-      if (left + dropdownWidth > viewportWidth) {
-        left = viewportWidth - dropdownWidth - 10; // 10px margin
-      }
-      if (left < 0) {
-        left = 10; // 10px margin
-      }
-
-      setDropdownStyles({
-        position: "absolute",
-        top: `${top + window.scrollY}px`,
-        left: `${left + window.scrollX}px`,
-        width: `${dropdownWidth}px`,
-      });
-    }
-  }, [isOpen, placement]);
-
-  // Update dropdown position on window resize or scroll
-  useEffect(() => {
-    const handleWindowChange = () => {
-      if (isOpen) {
-        if (toggleButtonRef.current) {
-          const toggleRect = toggleButtonRef.current.getBoundingClientRect();
-          const dropdownHeight = 200; // Max height as per CSS, adjust if needed
-          const dropdownWidth = toggleRect.width; // Match the toggle button's width
-
-          let top, left;
-
-          switch (placement) {
-            case "top":
-              top = toggleRect.top - dropdownHeight;
-              left = toggleRect.left;
-              break;
-            case "bottom":
-            default:
-              top = toggleRect.bottom;
-              left = toggleRect.left;
-              break;
-            case "left":
-              top = toggleRect.top;
-              left = toggleRect.left - dropdownWidth;
-              break;
-            case "right":
-              top = toggleRect.top;
-              left = toggleRect.right;
-              break;
-          }
-
-          // Ensure the dropdown stays within the viewport
-          const viewportHeight = window.innerHeight;
-          const viewportWidth = window.innerWidth;
-
-          // Adjust top position if dropdown goes beyond the viewport
-          if (top + dropdownHeight > viewportHeight) {
-            top = viewportHeight - dropdownHeight - 10; // 10px margin
-          }
-          if (top < 0) {
-            top = 10; // 10px margin
-          }
-
-          // Adjust left position if dropdown goes beyond the viewport
-          if (left + dropdownWidth > viewportWidth) {
-            left = viewportWidth - dropdownWidth - 10; // 10px margin
-          }
-          if (left < 0) {
-            left = 10; // 10px margin
-          }
-
-          setDropdownStyles({
-            position: "absolute",
-            top: `${top + window.scrollY}px`,
-            left: `${left + window.scrollX}px`,
-            width: `${dropdownWidth}px`,
-          });
-        }
-      }
-    };
-
-    window.addEventListener("resize", handleWindowChange);
-    window.addEventListener("scroll", handleWindowChange);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowChange);
-      window.removeEventListener("scroll", handleWindowChange);
-    };
-  }, [isOpen, placement]);
-
-  // Render dropdown menu in a portal
-  const dropdownMenu = isOpen
-    ? ReactDOM.createPortal(
+      {isOpen && (
         <div
           className={styles.dropdownMenu}
-          style={dropdownStyles}
           ref={dropdownRef}
           role="listbox"
           aria-activedescendant={
@@ -252,6 +131,10 @@ const Dropdown = ({
               ? `option-${highlightedIndex}`
               : undefined
           }
+          style={{
+            left: dropdownAnchorSide === "right" ? "auto" : 0,
+            right: dropdownAnchorSide === "right" ? 0 : "auto",
+          }}
         >
           <input
             type="text"
@@ -285,34 +168,15 @@ const Dropdown = ({
                   onClick={() => selectOption(option)}
                   onMouseEnter={() => setHighlightedIndex(index)}
                 >
-                  {option.label}
+                  {selectedOption?.value === option.value && "✔ "}{option.label}
                 </li>
               ))
             ) : (
               <li className={styles.noOptions}>No options found</li>
             )}
           </ul>
-        </div>,
-        document.body // Portal target
-      )
-    : null;
-
-  return (
-    <div className={styles.dropdownContainer}>
-      <button
-        type="button"
-        className={styles.dropdownToggle}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        onClick={toggleDropdown}
-        ref={toggleButtonRef}
-        onKeyDown={handleKeyDown}
-      >
-        {selectedOption ? selectedOption.label : placeholder}
-        <span className={styles.arrow}>{isOpen ? "▲" : "▼"}</span>
-      </button>
-
-      {dropdownMenu}
+        </div>
+      )}
     </div>
   );
 };
