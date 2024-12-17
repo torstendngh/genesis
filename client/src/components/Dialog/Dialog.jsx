@@ -42,7 +42,7 @@ const Dialog = ({ children, onClose }) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
       >
-        <button className={styles.closeButton} role="button" aria-label="close" title="Close">
+        <button className={styles.closeButton} role="button" aria-label="close" title="Close" onClick={onClose}>
           {/* Replace this with a fitting icon */}
           &#x2715;
         </button>
