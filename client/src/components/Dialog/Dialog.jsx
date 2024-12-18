@@ -20,6 +20,15 @@ const Dialog = ({ children, onClose }) => {
     };
   }, [handleEsc]);
 
+  // Lock body overflow when the dialog opens
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
   const handleBackgroundClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -42,8 +51,13 @@ const Dialog = ({ children, onClose }) => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.8, opacity: 0 }}
       >
-        <button className={styles.closeButton} role="button" aria-label="close" title="Close" onClick={onClose}>
-          {/* Replace this with a fitting icon */}
+        <button
+          className={styles.closeButton}
+          role="button"
+          aria-label="close"
+          title="Close"
+          onClick={onClose}
+        >
           &#x2715;
         </button>
         {children}
