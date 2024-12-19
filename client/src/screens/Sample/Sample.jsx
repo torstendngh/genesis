@@ -18,7 +18,7 @@ const Sample = ({}) => {
     <div className={styles.main}>
       {/* ↓ Delete below sample dialog */}
       <main className={styles.sampleDialog}>
-        <h1>Genesis Client</h1>
+        <h1>Genesis</h1>
         <h2>Dropdown</h2>
         <div className={styles.componentContainer}>
           <Dropdown

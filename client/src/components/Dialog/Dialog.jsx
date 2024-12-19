@@ -57,6 +57,7 @@ const Dialog = ({ children, onClose }) => {
           aria-label="close"
           title="Close"
           onClick={onClose}
+          tabindex="0"
         >
           &#x2715;
         </button>

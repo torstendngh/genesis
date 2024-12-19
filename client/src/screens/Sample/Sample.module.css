@@ -1,41 +1,62 @@
 .main {
-    background-color: #f8fafc;
+  background-color: #f8fafc;
 }
 
 .sampleDialog {
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
-    gap: 30px;
-    align-items: flex-start;
-    padding-bottom: 200px;
-    max-width: 800px;
-    width: 100%;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 30px;
+  align-items: flex-start;
+  padding-bottom: 200px;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .sampleDialog > h1 {
-    font-size: 64px;
-    color: #1e293b;
-    font-weight: 400;
-    margin-top: 70px;
+  font-size: 42px;
+  color: #0f172b;
+  letter-spacing: -0.02em;
+  font-weight: 550;
+  margin-top: 70px;
+  min-height: 200px;
+  border-radius: 20px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    45deg,
+    #f1f2fa,
+    #e6ecf8,
+    #e1f2fb,
+    #e5f4fb,
+    #f8fafc
+  );
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+  position: relative;
 }
 
 .sampleDialog > h2 {
-    font-size: 32px;
-    color: #1e293b;
-    align-self: stretch;
-    padding-top: 90px;
+  font-size: 32px;
+  color: #1e293b;
+  align-self: stretch;
+  padding-top: 90px;
 }
 
 .componentContainer {
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-self: stretch;
-    padding: 20px;
-    min-height: 200px;
-    border-radius: 20px;
-    border: 1px solid #e2e8f0;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  padding: 20px;
+  min-height: 200px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0px 2.8px 2.2px rgba(0, 0, 0, 0.003),
+    0px 6.7px 5.3px rgba(0, 0, 0, 0.004), 0px 12.5px 10px rgba(0, 0, 0, 0.005),
+    0px 22.3px 17.9px rgba(0, 0, 0, 0.006),
+    0px 41.8px 33.4px rgba(0, 0, 0, 0.007), 0px 100px 80px rgba(0, 0, 0, 0.01);
 }
