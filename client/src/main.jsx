@@ -6,11 +6,14 @@ import App from "./App.jsx";
 import "./assets/fonts/inter/inter.css";
 // Main styles and CSS reset
 import "./index.css";
+import { DialogProvider } from "./contexts/DialogContext.jsx.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <DialogProvider>
+        <App />
+      </DialogProvider>
     </BrowserRouter>
   </StrictMode>
 );

@@ -10,9 +10,10 @@ import Switch from "../../components/Switch/Switch";
 import Tooltip from "../../components/Tooltip/Tooltip";
 import Tabs from "../../components/Tabs/Tabs";
 import { AnimatePresence } from "framer-motion";
+import { useDialog } from "../../contexts/DialogContext.jsx";
 
 const Sample = ({}) => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const {setIsTemplateDialogOpen} = useDialog();
   return (
     <div className={styles.main}>
       {/* ↓ Delete below sample dialog */}
@@ -77,14 +78,7 @@ const Sample = ({}) => {
         </div>
         <h2>Dialog</h2>
         <div className={styles.componentContainer}>
-          <Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
-          <AnimatePresence>
-            {isDialogOpen && (
-              <Dialog onClose={() => setIsDialogOpen(false)}>
-                <p>Dialog content goes here</p>
-              </Dialog>
-            )}
-          </AnimatePresence>
+          <Button onClick={() => setIsTemplateDialogOpen(true)}>Open Dialog</Button>
         </div>
       </main>
       {/* ↑ */}
