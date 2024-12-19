@@ -55,23 +55,17 @@ This approach ensures that the necessary files and folders from the template are
 - **Configuration**: `jsconfig` for absolute imports
 - **Client Components:**
     - **ProtectedRoute**: Secure routes for authenticated users
-    - **Button**: Reusable button with variants:
-        - Default
-        - Primary
-        - Secondary
-        - Danger
+    - **Button**: Reusable button with variants
     - **Input**: Custom input fields
     - **Tabs**: Tabbed navigation
     - **Switch**: Toggle switch component
-    - **TabSwitch**: Tab selection with smooth transitions
-    - **Dropdown**: Interactive dropdowns
+    - **Dropdown**: Interactive dropdown with search
     - **Tooltip**: Contextual tooltips
     - **Dialog**: Modal dialog boxes
     - **Link**: Styled navigation links
     - **LoadingIndicator**: Indicate loading states
     - **Toast**: Notification system
-    - **Navbar**: Navigation bar
-        - **Tab**: Navbar tab
+    - **NavbarTab**: Navigation bar tab template using NavLink
 
 ### Server-Side
 - **Framework**: Express
@@ -116,6 +110,14 @@ This approach ensures that the necessary files and folders from the template are
 
 1. Make sure you are in the client folder if not already (`cd client`)
 1. Start the client with `npm run dev`
+
+### Sample Screen
+
+"src/screens/Dashboard/Dashboard.jsx" has a Sample component. this shows all components with sample data. you can delete the Sample component. Make sure to also delete the sample dialog options in "src/contexts/DialogContext.jsx".
+
+### Dialogs (Modals)
+
+Dialogs are controlled by "src/contexts/DialogContext.jsx". This makes a unified file for controlling all dialogs. When making a dialog use the component "src/components/Dialog/Dialog.jsx" as a base and add a state to the DialogContext.
 
 ### Pages & Routes
 
